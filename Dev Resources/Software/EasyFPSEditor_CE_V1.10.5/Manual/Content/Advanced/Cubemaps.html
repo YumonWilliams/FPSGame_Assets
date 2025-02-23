@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cubemaps</title>
+	<link rel="stylesheet" href="../../css/styles.css">
+  </head>
+  <body>
+	<p>Cubemaps are needed to change texture for each face of a wall.</p>
+	<p>To do that you need to create a special texture containing all necessary images. You can use this sample below:</p>
+	<p><div id="center-small"><img src="Cubemap.png"/></div></p>
+	<p>All textures should be rectangular and the mapping is as next (from top to bottom, if player looks up according to editor):</p>
+	<el>
+	<li>Top side</li>
+	<li>Left side, Front side (the one looking at player), Right side, Back side</li>
+	<li>Bottom side</li>
+	</el>
+	
+	<p>If you need to only change top and bottom sides, it is recommended to use tall texture:</p>
+	<p><div id="center-small"><img src="Cubemap2.png"/></div></p>
+	<p>Top texture will become texture for main sides and the bottom one will become top and bottom sides of a block.</p>
+	
+	<p>To use those textures just add them on map as usual.</p>
+	
+	<p>The texture for doors looks the same with the top texture being door texture and the bottom one texture for the doorframe (see "Modifiers")</p>
+  </body>
+  
+</html>

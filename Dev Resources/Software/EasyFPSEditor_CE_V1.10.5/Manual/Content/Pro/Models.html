@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HUD</title>
+	<link rel="stylesheet" href="../../css/styles.css">
+  </head>
+  <body>
+    <p>Models configurator lets you swap entities and weapons sprites with models.</p>
+	<p><div id="center"><img src="Models.png"/></div></p>
+	<p>The engine supports MD3 models for everything so you will need to convert them to MD3 format. You can use any 3D modeling software for that as long as it has proper plugins.</p>
+	<p>Keep in mind, this is a <b>swap</b> for sprites, not a replacement. You will still need to provide editor with at least Pickup sprite for entities and weapons. Since models are just swaps for sprites, you will need to provide proper number of frames (which in most simple case is the same as sprites number for your entity or weapon).</p>
+	<p>To add a model, press the left button beneath models list and then select entity or weapon you want to swap with a model.</p>
+	<p>The fields here are, as always, mostly selfexplanatory but here is what they do:</p>
+	<el>
+	<li><b>X Offset</b> - offsetting model on X axis</li>
+	<li><b>Y Offset</b> - offsetting model on Y axis</li>
+	<li><b>Z Offset</b> - offsetting model on Z axis</li>
+	<li><b>Scale</b> - sets model scale. This is different from entity scale. Entity scale sets collision scale as well. Model scale only sets scale of entity representation on screen.</li>
+	<li><b>Yaw</b> - rotates model along Y axis, that is to the left and to the right</li>
+	<li><b>Offset Scale (weapons only)</b> - sets how much weapon shifts when changing weapons</li>
+	<li><b>Sway Scale (weapons only)</b> - sets how much weapon sways when moving camera</li>
+	<li><b>Outline Scale</b> - sets outlines width (if enabled in settings)</li>
+	<li><b>Shadow Camera Distance</b> - a setting for future updates</li>
+	<li><b>Shadow Scale</b> - a setting for future updates</li>
+	<li><b>Position random radius</b> - if this set to something higher that zero, model will be offset to a random position at this radius.</li>
+	<li><b>Merge with level geometry</b> - if enabled, static decorations (that is, non-breakable and lighted entities) will be merged with level geometry. This will improve performance and eliminate problems with models disappearing even if a part of it is on screen. Be aware though, that if you want to use outlines, you will need to disable this option as level geometry doesn't have any outlines at all.</li>
+	<li><b>Generate collision</b> - if enabled, a new collison box based on model bounding will be created. Otherwise entity will use its old collision circle.</li>
+	<li><b>Has transparency</b> - if enabled, a more advance (but more processor demanding) sorting of models will be used when merging geometry (it will be ignored if model is not merged with level geometry). Be awared, just a single transparent model on map is enough to enable this mode. It's a good idea to not have trasparent models at all.</li>
+	<li><b>World Model</b> - model representing entity or weapon in world (for weapons this is its pickup model).</li>
+	<li><b>View Model (weapons only)</b> - model showing weapon in player's hands. If you want a muzzle flash to appear you will also need to provide a separate mesh (that is, as a part of the model) called "muzzle" (all lower-case letters). This mesh should be a plane in the place where you want your muzzle flash to appear (see screenshot). Textures for muzzle flash can be changed manually in "Sprites/Effects" folder. The engine supports 3 muzzle flash textures which it will choose randomly each time a weapon is shot.</li>
+	<li><b>Ammo Model (weapons only)</b> - model representing weapon ammo pickup</li>
+	</el>
+	<p><div id="center"><img src="Models2.png"/></div></p>
+  </body>
+</html>

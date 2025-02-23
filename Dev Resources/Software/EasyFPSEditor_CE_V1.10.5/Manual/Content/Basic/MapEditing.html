@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tiles</title>
+	<link rel="stylesheet" href="../../css/styles.css">
+  </head>
+  <body>
+    <p>When tiles are added you can start making your map. Doing that is pretty simple.</p>
+	<p>First of all create a new map by selecting "Maps" tab and clicking "Create a new map" button. This will open a prompt where you'll be able to name your map file.</p>
+	<p><div id="center"><img src="MapEditing1.png"/></div></p>
+	<p>After that a map editing screen will show up. To the right you'll see a list of map properties which you can change at any time:</p>
+	<p><div id="center-big"><img src="MapEditing2.png"/></div></p>
+	<p>Here you can:</p>
+	<el>
+		<li>Import music file</li>
+		<li>Import cutscene file (basically an image that will be shown before map starts. For more complex cutscenes see "Advanced Use/Scripting")</li>
+		<li>Import skybox file</li>
+		<li>Set map ambient lighting color</li>
+		<li>Set map fog color and distance</li>
+		<li>Set doors type for this map</li>
+		<li>Set terminals scripts (see "Advanced Use/Terminals")</li>
+		<li>Set triggers scripts or sounds (see "Advanced Use/Triggers")</li>
+		<li>Set user lights colors and radii</li>
+		<li>Change some sounds for this map (such as doors opening sound)</li>
+	</el>
+	<p>Tabs to the left contain tiles, objects and modifiers (see "Modifiers"). To the top of the map editor are Zoom and Floor selections. You can change floor whenever you want, the lower floor will be shown as slightly lighter layer beneath the current one.</p>
+	<p>To place tiles just select the one you want from "Tiles" tab and press left mouse button on the map where you want to place it. Right mouse button lets you remove a placed tile. If you hold the control key while placing or removing a tile, you can drag the mouse to modify a rectangle region. Walls will be marked with red outline while floors will be placed as the texture it represents.</p>
+	<p>At the bottom of the map window there is a checbox that allows you to hide entities layer. This is useful when you don't need them to overlay the main map.</p>
+	<p><b>Map editing</b></p>
+	<p>Map editing is extremely simple. There are only a few things you need to keep in mind:</p>
+	<el>
+	<li>If you need different textures for top and bottom side of a block (walls only) you can use a special texture consisting of two different textures placed together into one tall texture. The top one will be texture for main sides and the bottom one will become texture for top and bottom sides (floor and ceiling) (see image below). For more info see "Cubemaps".</li>
+	<li>Floors can't be seen from above. That means that if you place a floor on floors higher than first one, there will be no floor (though you will be able to walk on it). To add a second floor you have to use walls on the lower floor.</li>
+	<li>There are three skybox types which can be selected with the dropdown box. Flat is a flat plane above the world. Cylinder surrounds the sides of the world like in Doom. Cube will completely surround the world, and allow you to use a cubemapped texture. Choosing a fog color will help blend the skybox and geometry together in a visually appealing way.</li>
+	</el>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Triggers</title>
+	<link rel="stylesheet" href="../../css/styles.css">
+  </head>
+  <body>
+	<p>Inside "Data/Scripts" there is a main menu script file called "Menu.script". It uses its own commands but basically it's a script. Any menu option is hard-coded so all you can do is change its position and add a text.</p>
+
+	<ul>
+	<li><b>mcolor 255 255 255</b> - sets main menu font color as R,G,B.</li>
+	<li><b>mbutton "CONTINUE" 50 370 "return" -1</b> - creates a button. You can't create your own button, they're hard coded. The last number is a meu screen this button will be shown at: -1 - any of them, 0 - main screen only, 1 - save, 2 - load, 3 - video, 32 - video 2, 4 - game, 5 - audio, 6 - input, 62 - keyboard.</li>
+	<li><b>mtext "SETTINGS" 570 30 5</b> - the only component you can create. Just shows a text.</li>
+	</ul>
+  </body>
+  
+</html>

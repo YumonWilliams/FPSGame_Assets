@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Weapons</title>
+	<link rel="stylesheet" href="../../css/styles.css">
+  </head>
+  <body>
+    <p>Easy FPS Editor lets you set up to 8 weapon types. You can do so in "Weapons Settings" option in "Objects Settings" menu.</p>
+	<p>By default there are no weapons. All you have to do to add it is rename one of them:</p>
+	<p><div id="center"><img src="Weapons1.png"/></div></p>
+	<p>Each weapon is tied to a slot in player inventory binded to keys 1 to 8. To delete a weapon just click the button under the list. All properties are selfexplaining but there is a list with explanation at the bottom of this page.</p>
+	
+	<p>Here you can set weapon position and scale:</p>
+	<p><div id="center"><img src="Weapons2.png"/></div></p>
+	
+	<p>Import sprites:</p>
+	<p><div id="center"><img src="Weapons3.png"/></div></p>
+	
+	<p>And import sounds:</p>
+	<p><div id="center"><img src="Weapons4.png"/></div></p>
+	
+	<p>Historically engine was made to work at 1280 by 720 resolution. So weapon position is bind to these sizes. Thus to center a weapon horizontally you'll need to set positon to (640 - half width of the sprite).</p>
+	<p>It is strongly recommended to store resources separated from the project folder as they will be copied to appropriate folder and renamed as needed.</p>
+	
+	<p>Weapon settings:</p>
+	<el>
+	<li><b>Max ammo</b> - max ammo player can hold for this weapon.</li>
+	<li><b>Mag ammo</b> - number of ammo in a magazine. Set to 0 to disable reloading.</li>
+	<li><b>Damage</b> - damage dealt to enemies or decorations.</li>
+	<li><b>Fire rate</b> - weapon fire rate (in frames per second. Since 7 is default frames number, 7 equals 1 shot per second).</li>
+	<li><b>Bullets number</b> - number of bullets per shot. If set higher than 1 a weapon will act as a shotgun.</li>
+	<li><b>Reload speed</b> - weapon reload speed. in frames per second.</li>
+	<li><b>Projectile speed</b> - projectile speed in units per second. One tile is 64 units.</li>
+	<li><b>Explosion Radius</b> - explosion radius. If set, projectiles or hitscan attacks will create an explosion.</li>
+	
+	<li><b>Recoil</b> - amount of recoil which will lift weapon up. A reasonable value is around 2-4.</li>
+	<li><b>Spread</b> - spread that will be added to each consecutive shot. Reduces with time. A reasonable value is around 6-8.</li>
+	<li><b>Recoil Recovery Speed</b> - rate at which camera get back to its normal position after a shot. In units per second. A reasonable value is around 20-25.</li>
+	<li><b>Range</b> - Range multiplier affects how far the attack/projectiles can reach. 1 is normal, 0.5 is half, 2 is double</li>
+	
+	<li><b>Ammo in box</b> - number of ammo given when ammo item is picked up.</li>
+	
+	<li><b>Melee</b> - sets if weapon is a melee type.</li>
+	<li><b>Uses projectiles</b> - sets if weapon shoots projectiles or is a hitscan.</li>
+	<li><b>Fullbright projectiles</b> - disabes or enables lighting on projectiles</li>
+	</el>
+  </body>
+</html>

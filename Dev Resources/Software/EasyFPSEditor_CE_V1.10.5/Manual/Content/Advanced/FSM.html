@@ -1,0 +1,185 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Finite State Machines</title>
+	<link rel="stylesheet" href="../../css/styles.css">
+  </head>
+  <body>
+	<p>FSM or Finite State Machine allows you to extend sprites animation and entities behavior on general.
+	It is a set of lines that describe what sprites enemy or decorations will have and what will they do.
+	In short, you can change how many sprites an entity has and how fast frames will switch one another.</p>
+	<p>To add a state machine, you need to create a file with the .states extension and the name of the weapon, enemy, or decoration in the ProjectName/States folder.
+When adding a state machine, the attack and reload speed will no longer depend on the setting in the editor - everything will be controlled only by the duration of the frames specified in the file. In addition, all sprites and (for weapons) some of the sounds will need to be loaded manually using the image and sound commands.</p>
+	<p>Basic FSM for a weapon:</p>
+	<div id="progs">
+		<div>image Weapon 0 7</div>
+		<div>sound WeaponFire</div>
+		<div>sound WeaponReload</div>
+		<br>
+		<div>state IDLE NONE 0</div>
+		<div>frame 1 0.25 0 0 0 NONE </div>
+		<div>frame 1 0.25 0 0 0 READY </div>
+		<br>
+		<div>state ATTACK IDLE 0</div>
+		<div>frame 2 1 0 0 0 NONE</div>
+		<div>frame 3 1 0 0 0 SOUNDANDATTACK 0</div>
+		<div>frame 4 1 0 0 0 MUZZLEFLASH</div>
+		<div>frame 5 1 0 0 0 READY</div>
+		<div>frame 6 1 0 0 0 NONE</div>
+		<div>frame 7 1 0 0 0 NONE</div>
+		<div>frame 1 0.25 0 0 0 NONE</div>
+		<div>frame 1 0.25 0 0 0 NONE</div>
+		<br>
+		<div>state RELOAD IDLE 0</div>
+		<div>frame 1 0 0 0 0 NONE</div>
+		<div>frame 1 0.1 0 0 0 NONE</div>
+		<div>frame 1 0.1 0 200 0 NONE</div>
+		<div>frame 1 0.1 0 200 0 RELOAD</div>
+		<div>frame 1 0.1 0 0 0 SOUND 1</div>
+	</div>
+	<p>Basic FSM for enemies:</p>
+	<div id="progs">
+		<div>image Enemy 0 12</div>
+		<br>
+		<div>state IDLE NONE 0</div>
+		<div>frame 0 0.125 0 0 0 NONE</div>
+		<div>frame 0 0.125 0 0 0 READY</div>
+		<br>
+		<div>state SEE CHASE 0</div>
+		<div>frame 0 0.125 0 0 0 NONE</div>
+		<div>frame 0 0.125 0 0 0 READY</div>
+		<br>
+		<div>state CHASE NONE 0</div>
+		<div>frame 1 1 0 0 0 NONE</div>
+		<div>frame 2 1 0 0 0 NONE</div>
+		<div>frame 3 1 0 0 0 NONE</div>
+		<div>frame 4 1 0 0 0 READY</div>
+		<br>
+		<div>state ATTACK CHASE 0</div>
+		<div>frame 5 0.25 0 0 0 NONE</div>
+		<div>frame 5 0.25 0 0 0 NONE</div>
+		<div>frame 6 0.0625 0 0 0 NONE</div>
+		<div>frame 6 0.0625 0 0 0 ATTACK</div>
+		<div>frame 5 0.25 0 0 0 NONE</div>
+		<div>frame 5 0.25 0 0 0 READY</div>
+		<br>
+		<div>state HURT CHASE 0</div>
+		<div>frame 7 0.125 0 0 0 NONE</div>
+		<div>frame 8 0.125 0 0 0 NONE</div>
+		<br>
+		<div>state DEATH DEAD 0</div>
+		<div>frame 9 0.166 0 0 0 NONE</div>
+		<div>frame 10 0.166 0 0 0 NONE</div>
+		<div>frame 11 0.166 0 0 0 NONE</div>
+		<br>
+		<div>state DEAD NONE 0</div>
+		<div>frame 12 0.125 0 0 0 NONE</div>
+		<div>frame 12 0.125 0 0 0 NONE</div>
+	</div>
+	<p>Basic FSM for decorations:</p>
+	<div id="progs">
+		<div>image Decoration 0 3</div>
+		<br>
+		<div>state IDLE NONE 0</div>
+		<div>frame 0 0.25 0 0 0 NONE</div>
+		<div>frame 0 0.25 0 0 0 READY</div>
+		<br>
+		<div>state DEATH DEAD 0</div>
+		<div>frame 1 0.166 0 0 0 NONE</div>
+		<div>frame 2 0.166 0 0 0 NONE</div>
+		<div>frame 3 0.166 0 0 0 NONE</div>
+		<br>
+		<div>state DEAD NONE 0</div>
+		<div>frame 3 0.25 0 0 0 NONE</div>
+		<div>frame 3 0.25 0 0 0 NONE</div>
+	</div>
+	
+	<p>Let's take a look:</p>
+	<p><b>image Decoration 0 3</b> - loads sprites and adds them to a list. They are numbered from 0. In this case this command will load every sprite from "Decoration0" to "Decoration3". Sprites must be placed in Data/Sprites/ with apropriate entity folder (Decorations or Enemies) or weapons(Weapons). e.g. "Data/Sprites/Decorations". Weapon sprites MUST have frame 0 which is used for sprites on the floor.</p>
+	<p><b>image Decoration</b> - will load only one sprite (in this case named "Decoration") and add it to a list.</p>
+	<p><b>sound WeaponFire</b> - will load a sound and add it to a list. They are numbered from 0. Sounds must be placed in Data/Sounds.</p>
+	<p><b>state IDLE NONE 0</b> - creates a new state, where IDLE is a name, NONE - name of the next state to jump to after this one is done (if it's NONE, current state will be looped), 0 (или 1) - sets if you want this state to interpolate model frames or not (if you use 3D models).</p>
+	<p><b>frame 0 0.25 0 0 0 NONE</b> - adds a frame to the latest created state. Here 0 - number of a sprite that was loaded (see earlier), 0.25 - time this frame will be staying on screen, 0 0 0 - offset coordinates (only for weapons), NONE - action (see further down).</p>
+	<p>States shown in examples are MANDATORY to create. There might be many other states, however enemies will only move while in CHASE state. Enemy will spawn blood when in state HURT.</p>
+	<p>There's also an additional state for weapons called ALTATTACK and can be used to use your weapon with right mouse button.</p>
+	<p>Weapons can also have optional DRAW and HOLSTER states, which will be used when you switch to/from the weapon respectively. If specified, these will replace the weapon-switching animations.</p>
+	<p>All key words are <b>CASE SENSITIVE!</b> Also be wary of whitespaces, they are important for engine to correctly parse parameters. Only latin characters are allowed.</p>
+	<p><b>Frame delays are the amount of time it takes for the frame to be displayed. It affects how long the *previous* frame is on screen, not the *current* frame.</b></p>
+	<h3>Actions:</h3>
+	<b>
+	<p><b>Actions on the first line of any state will be ignored.</b> It's highly recommended that you set the first frame action to NONE for all states.</p>
+	<p>All parameters starting with a $ can be a number, or can be substituted for variables if you write a variable name with a $ at the start</p>
+	<p>Any parameters within [square brackets] are optional. Numbers after a ':' are the default value if not specified. eg; [value: 2] is optional and defaults to 2</p>
+	</b>
+	<div id="command">
+	<b>Weapons Decorations and Enemies</b>
+	<p>Math</p>
+	<div><b>INCREMENT name [$value: 1]</b> - increments the value of a variable, i.e. increases </div>
+	<div><b>DECREMENT name [$value: 1]</b> - decrements the value of a variable, i.e. decreases </div>
+	<div><b>MULTIPLY name $value</b> - multiplies the value of a variable </div>
+	<div><b>DIVIDE name $value</b> - divides the value of a variable </div>
+	<div><b>MODULO name $value</b> - performs modulo operation on the value of a variable </div>
+	<div><b>CLAMP name $min $max</b> - confines the value of a variable between min and max </div>
+	
+	<p>Jumps</p>
+	<div><b>JUMPIFEQUALS variable $value state</b> - moves to another state if variable value equal to the one we want. You can also use global. and map. prefixes.</div>
+	<div><b>JUMPIFNEQUALS variable $value state</b> - moves to another state if variable value is not equal to the one we want. You can also use global. and map. prefixes.</div>
+	<div><b>JUMPIFGEQUALS variable $value state</b> - moves to another state if variable value equal or greater to the one we want. You can also use global. and map. prefixes.</div>
+	<div><b>JUMPIFLEQUALS variable $value state</b> - moves to another state if variable value equal or less to the one we want. You can also use global. and map. prefixes.</div>
+	<div><b>JUMPIFGREATER variable $value state</b> - moves to another state if variable value greater to the one we want. You can also use global. and map. prefixes.</div>
+	<div><b>JUMPIFLESS variable $value state</b> - moves to another state if variable value less to the one we want. You can also use global. and map. prefixes.</div>
+	<div><b>JUMPIFHPLESS $value state</b> - moves to another state if hp is lower than specified value (0 = no health, 1 = 100% health)</div>
+	
+	<p>Other</p>
+	<div><b>NONE</b> - empty. Does nothing.</div>
+	<div><b>READY</b> - sets if entity is ready to attack. Mandatory after enemy or weapon attack.</div>
+	<div><b>SOUND $value</b> - plays a sound, value - number of a loaded sound (see earlier).</div>
+	<div><b>SOUNDANDATTACK $value</b> - does attack and plays sound in one action.</div>
+	<div><b>PLAYERSPEED $value</b> - controls player's movement speed. 1 = normal, 0.5 = half, 2 = double, etc..</div>
+	<div><b>PARTICLES imageindex i,l,x,y,z dx,dy,dz</b> - creates particles. imageindex - number of sprite loaded, i - number of particles, l - particle lifetime, x,y,z - coordinates. Coordinates are local to enemy or player, meaning that 0,0,1 will always be in front of enemy or player. x - side offset, y - vertical offset, z - forward offset. dx,dy,dz - particle velocity. Also local to entity.</div>
+	<div><b>CUSTOMPARTICLE $id $lifetime $x,$y,$z $dx,$dy,$dz $scale $gravity</b> - creates one custom particle. id - which particle image to use (shared between all entities, loaded from "Particles\CustomX.png", X is the particleID), lifetime and xyz are the same as in PARTICLES. dx,dy,dz are always exact values, and will not be randomised. scale affects the particle size. gravity is the fall strength.</div>	
+	<div><b>SETVAR name $value</b> - sets variable to a certain value. You can use RANDOM(0,100) instead of value. The value will be randomized from 0 to 100. You can also use global. and map. prefixes to set global or map variables (see Scripting). value can be set to LASTDAMAGE, HP or MAXHP to retrieve the last amount of damage the entity received, its current hp, or its max hp.</div>
+	<div><b>MODELTEXTURE path [name]</b> - if a 3d model is used, sets the texture. Path is a texture path relative to your project directory (Textures/wallTexture.png). If a variable name is specified after the path, any $ symbols in the path will be replaced with that variable's value. Textures are cached when they are first used, allowing you to preload them for performance if required. </div>
+	<div><b>SPAWN name x,y,z f,v</b> - creates an entity with a name (enemies and decoration) or a keyword (Key1, Key2, Key3, Hp1, Hp2, Hp3, Hp4, Armour1, Armour2, Armour3, Armour4). x,y,z - just like with particles, f - front velocity when spawned, v - vertical velocity when spawning.</div>
+	<div><b>HUDIMG $imageName $x $y $scale $path $layer</b> - Exactly the same the "hud image" command. Creates or updates a hud image. Using the same imageName will replace the previous hud image with that name. Using 'HUDIMG imageName' without any other parameters will remove the specified hud image.</div>
+	<div><b>CAMSPEED $speedMultiplier</b> - Sets a multiplier value to use for the player's camera rotation speed. 1 = normal, 0 = frozen, 2 = double, etc..</div>
+	</div>
+	
+	<div id="command">
+	<b>Weapons and Enemies</b>
+	<br>
+	<div><b>ATTACK</b> - weapon or enemy attack</div>
+	</div>
+	
+	<div id="command">
+	<b>Enemies and Decorations</b>
+	<br><br>
+	<div><b>EXPLOSION name radius</b> - creates an explosion with a name and radius where name is name of explosion sprites. Sprites must be place in Data/Sprites/Effects.</div>
+	</div>
+	
+	<div id="command">
+	<b>Enemies only</b>
+	<br><br>
+	<div><b>PROJECTILE [$angle: 0] [absolute? 0/1] [$height: 0] [$spread: 0]</b> - shoots a projectile in the specified direction. angle is in degrees.
+	<div>If absolute is 0, angle will be relative to the player's direction (0 = directly at player, 180 = directly away from player). If absolute is 1, angle will be an exact direction in the world. 0=North, 90 = East, etc..</div>
+	<div>Height is a relative height offset to shoot the projectile (negative = lower, positive = higher). Spread adjusts how much random jitter to apply to the projectile's direction.</div>
+	<div>Enemy must have shooting and projectiles enabled. Speed is determined by the enemy's projectile speed</div>
+	<p>Example: "frame 0 0.01 0 0 0 PROJECTILE 90 0 1 0" Will shoot a projectile at the enemy's current rotation plus 90 degrees, with an added height of 1 and no spread</div>
+	</div>
+		
+	<div id="command">
+	<b>Weapons only</b>
+	<br><br>
+	<div><b>JUMPIFLESSAMMO state</b> - moves to another value if ammo in magazine is lower than maximum.</div>
+	<div><b>JUMPIFNOAMMO state</b> - moves to another state if magazine is empty.</div>
+	<div><b>GIVEAMMO [$value: 1] [fromTotal?: 0]</b> - adds ammo to the weapon. If fromTotal is set to 1, ammo is taken from the total count, otherwise it's taken from the magazine.</div>
+	<div><b>TAKEAMMO [$value: 1] [fromTotal?: 0]</b> - takes ammo from the weapon.</div>
+	<div><b>SETAMMO $value [fromTotal?: 0]</b> - directly sets the weapon's ammo.</div>
+	<div><b>RELOAD</b> - reloads magazine.</div>
+	<div><b>MUZZLEFLASH</b> - shows muzzle flash.</div>
+	<div><b>SETSTAT stat $value</b> - sets one of the weapon's stats to specified value. Same available stats as the <a href="Scripting.html#weapon">weapon command</a></div>
+	<div><b>ZOOM $value</b> - sets the current camera zoom (-100 to 100). Negative values will zoom out. 0 = no zoom.</div>
+	</div>
+  </body>
+  
+</html>

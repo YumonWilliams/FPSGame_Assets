@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Shaders</title>
+	<link rel="stylesheet" href="../../css/styles.css">
+  </head>
+  <body>
+	<p>There will be no tutorial on writing shaders, only general information about how they are used (for those who know how to write them).</p>
+
+<p>There is only one shader in the engine - the lighting shader. The supplied shader uses a simplified model, no specular or anything like that, however, by editing it you can get various effects, such as sepia, invert or cell shading effect. Shader files are located in the ProjectName/Shaders folder, and they can be changed via a script (see Scripts, List of Commands, shader set). Only two object uniforms are passed to the shader - the texture and the number of activated light sources. The sources themselves are sorted by the engine in descending order, and the shader uses OpenGL's built-in variables to access the sources.</p>
+  </body>
+  
+</html>

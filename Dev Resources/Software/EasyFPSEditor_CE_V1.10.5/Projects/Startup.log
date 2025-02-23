@@ -1,0 +1,49 @@
+[Loading game info]
+Game info was loaded successfully
+[Loading animated textures]
+Done!
+[Loading textures]
+Loading texture "stoneWall.png"...Done!
+Loading texture "stoneFloor.png"...Done!
+[Loading enemies]
+[Loading weapons]
+Weapon "USAS12" was loaded successfully
+Weapon "Pump" was loaded successfully
+Weapon "tech9" was loaded successfully
+Weapon "ar180" was loaded successfully
+Weapon "m1919" was loaded successfully
+[Loading maps info]
+Loading map info for map "WeaponsTestLevel.eem"...
+Done!
+[Loading hp info]
+HP 1 sprite was loaded successfully
+HP 2 sprite was loaded successfully
+HP 3 sprite was loaded successfully
+HP 4 sprite was loaded successfully
+HP info was loaded successfully
+[Loading armour info]
+Armour 1 sprite was loaded successfully
+Armour 2 sprite was loaded successfully
+Armour 3 sprite was loaded successfully
+Armour 4 sprite was loaded successfully
+Armour info was loaded successfully
+[Loading decorations]
+Loading decoration "target"...
+Done!
+Loading decoration "target002"...
+Done!
+Loading decoration "target003"...
+Done!
+Loading decoration "target004"...
+Done!
+[Loading models info]
+Loading model ""...
+[Loading HUD settings]
+HUD settings were loaded successfully
+[Loading custom tiles]
+Loading tile "ColumnBig"...
+Done!
+Loading tile "ColumnSmall"...
+Done!
+Global game resources were loaded successfully
+[Loading scripts]

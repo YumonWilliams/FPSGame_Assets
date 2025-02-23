@@ -1,0 +1,58 @@
+img {
+width: 100%;
+}
+
+#center-small {
+margin: auto;
+width: 200px;
+}
+
+#center {
+margin: auto;
+width: 400px;
+}
+
+#center-big {
+margin: auto;
+width: 800px;
+}
+
+#toc {
+width: 20%;
+float: left;
+}
+
+#content {
+width: 80%;
+float: right;
+}
+
+#progs {
+width: 90%;
+padding: 5px;
+border: 2px solid;
+border-color: green;
+background: black;
+color: white;
+}
+
+#command {
+width: 90%;
+padding: 5px;
+margin: 5px;
+border: 2px solid;
+border-color: black;
+}
+
+.command {
+width: 90%;
+padding: 5px;
+margin: 5px;
+border: 2px solid;
+border-color: black;
+}
+
+iframe {
+width: 100%;
+height: 100%;
+}

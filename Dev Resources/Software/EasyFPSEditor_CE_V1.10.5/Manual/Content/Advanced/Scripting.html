@@ -1,0 +1,375 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Scripting</title>
+	<link rel="stylesheet" href="../../css/styles.css">
+  </head>
+  <body>
+	<p><b>Warning: scripts must follow a very strict format. Writing them incorrectly could break your game. Use with caution and always test your scripts!</b></p>
+	<br>
+	<p>To make use of scripting system you need to create script file in "Data/Scripts". It's a simple text file with ".script" extension (if you don't have extensions enabled in explorer, then you should do it right now. If you're not willing to, you'll have to find an example script file somewhere and edit it). Script file name can be:</p>
+	<ul>
+		<li>MapName.script - where "MapName" is... well, name of the map you want to bind this script to.</li>
+		<li>DecorationName.script - where "DecorationName" is name of decoration you want to bind this script to. This script will be used when player is near decoration and presses use.</li>
+		<li>Any other script will be loaded only if it was set in triggers or terminals settings (see "Triggers")</li>
+	</ul>
+	<p>The scripting language is very simple to use:</p>
+	<p>Commands are written each on its own line. Any argument these commands need should be separated by a single whitespace. That's it, commands are executed in order top to bottom of the file.</p>
+	
+	<p>Example:</p>
+	<div id="progs">
+		<div>image Character Sprites/Characters/Character.png</div>
+		<div>show Character 0 0 2</div>
+		<div>text "Hello World!"</div>
+		<div>hide Character 2</div>
+		<div>timeout 2</div>
+		<div>map start</div>
+	</div>
+	<p>This script will load image, set it's name as Character, show it at 0, 0 within 2 seconds, show text on screen, hide image within 2 seconds, set timeout for 2 seconds start the map.</p>
+	
+	<h3>Variables</h3>
+	<p>A variable is a name that you can bind a certain value to. There are three kinds of variables:</p>
+	<ul>
+		<li>Global - available entire game disregarding of map player currently plays.</li>
+		<li>Map variables - available during current map. Deleted after it's over.</li>
+		<li>Local variables - available only during current script. Deleted after it's done working.</li>
+	</ul>
+	<p>To set a variable you just need to write it's name and a value, separated by "=". "global." prefix is for global variables, "map." is for map variables:</p>
+	<div id="progs">
+		<div>global.value=10</div>
+		<div>map.value="Character"</div>
+		<div>value=10</div>
+	</div>
+	<p>To use a variable you need to put $ symbol before it's name:</p>
+	<div id="progs">
+		<div>text "$global.value"</div>
+		<div>image $map.value Sprites/Characters/Character.png</div>
+		<div>text "$value"</div>
+	</div>
+	
+	<p>If you need to calculate something (and variable is a number) use next operators:</p>
+	<div id="progs">
+		<div>value+=2 //Addition</div>
+		<div>value-=2 //Subtraction</div>
+		<div>value*=2 //Multiplication</div>
+		<div>value/=2 //Subdivision</div>
+		<div>value%=2 //Modulo operation</div>
+		<div>value++ //Increment (increase by 1)</div>
+		<div>value-- //Decrement (decrease by 1)</div>
+	</div>
+	
+	<p>Variables can also be set to 'RANDOM(x,y)' to pick a random number between x (inclusive) and y (exclusive):</p>
+	<div id="progs">
+		<div>value=RANDOM(0,3) //Randomly sets 'value' to either 0,1, or 2</div>
+	</div>
+	
+	<h3>Conditions</h3>
+	<p>Conditions are blocks of code that will be executed only if some conditions are met. Be aware: <b>"if", and comparator are commands as well, so there MUST be whitespace separating them</b>:</p>
+	<div id="progs">
+		<div>if $value == 1 {</div>
+		<div>map next</div>
+		<div>} else {</div>
+		<div>map goto 3</div>
+		<div>}</div>
+	</div>
+	<p>Code inside if block will be executed only if value is 1. Code inside "else" block will be executed if value is NOT 1. Else block may be imotted if you don't need it:</p>
+	<div id="progs">
+		<div>if $value == 1 {</div>
+		<div>map next</div>
+		<div>}</div>
+	</div>
+	<p>Instead of "==" you can use:</p>
+	<ul>
+		<li>!= - condition is met if value is NOT equal</li>
+		<li><= - condition is met if value is less or equal</li>
+		<li>>= - condition is met if value is greater or equal</li>
+		<li>< - condition is met if value is less</li>
+		<li>> - condition is met if value is greater</li>
+	</ul>
+	
+	<h3>Procedures</h3>
+	<p>Procedures are pieces of code that can be used whenever you want. Key word "end" marks procedure end, so be sure there is enough of these:</p>
+	<div id="progs">
+		<div>procedure helloworld</div>
+		<div>text "Hello World!"</div>
+		<div>end; //semicolon in necessary if you have more than one procedure</div>
+		<div>procedure helloworld2</div>
+		<div>text "Hello World 2!"</div>
+		<div>end</div>
+	</div>
+	<p>Calling a procedure is just a matter of using command "call":</p>
+	<div id="progs">
+		<div>call helloworld</div>
+		<div>call helloworld2</div>
+	</div>
+	<p>Procedures exist only inside one single file. If you need them in another file, you'll have to copy them.</p>
+	
+	<h3>Commentaries</h3>
+	<p>If you put "//" in front of a line this line will become a commentary - a non-executable code that is just here to set a note for yourself.</p>
+	<div id="progs">
+		<div>//This is a commentary</div>
+		<div>call helloworld</div>
+	</div>
+	
+	<h3>Generic commands list:</h3>
+	<b>Please note that rectangular braces are here just to mark an argument. You do not need to put them yourself.</b>
+	<div class="command">
+	<div><b>auto</b></div>
+	<div>auto [0/1] - sets auto execution. By default script is executed line-by-line as player presses left mouse button or use button.</div>
+	</div>
+	
+	<div class="command">
+	<div><b>timeout</b></div>
+	<div>timeout time - sets timeout. Next script line will be executed automatically when timeout is over.</div>
+	</div>
+	
+	<div class="command">
+	<div><b>call</b></div>
+	<div>call procedureName - calls a procedure.</div>
+	</div>
+	
+	<div class="command">
+	<div><b>pause</b></div>
+	<div>pause - pauses script until mouse button is pressed or a use key is pressed.</div>
+	</div>
+	
+	<div class="command">
+	<div><b>halt</b></div>
+	<div>halt - stops script entirely.</div>
+	</div>
+	
+	<div class="command">
+	<div><b>keeptrigger</b></div>
+	<div>keeptrigger - prevents trigger that called the script from being deleted when the script ends.</div>
+	</div>
+
+	<h3>Game commands list:</h3>
+	<div class="command" id="map">
+	<div><b>map</b></div>
+	<div>map start [keepmusic] - starts map after cutscene script is over. <b>Must only be used in cutscenes at the start of a map!</b> If keepmusic is 1 - music played in the cutscene will be played on map as well. If it's 0 or omitted, map music will be played.</div>
+	<div>map next - moves to the next map.</div>
+	<div>map return [KeepSounds? 0/1/2/3] - return to map. Use only in triggers, terminals or active decorations with scripts. KeepSounds:  0 stops all scripted sounds, 1 keeps scripted music, 2 keeps scripted music and sounds, 3 keeps scripted sounds</div>
+	<div>map quickreturn [KeepSounds? 0/1/2/3] - return to map without interrupting player input, enabling keybind scripts to run repeatedly while held, and avoiding input delay when a trigger is activated</div>
+	<div>map goto [index] - moves to a certain map. index - map number in the list (starting from 0).</div>
+	</div>
+	
+	<div class="command" id="player">
+	<div><b>player</b></div>
+	<div>player heal [amount] - heals player.</div>
+	<div>player hurt [amount] - hurts player.</div>
+	<div>player teleport [tileX] [tileY] [tileZ] [relative? 0/1] - moves player to tile coordinates (0 to 63). <b>tileY is floor number</b> (0 to 8). TileX and tileZ can be seen in the editor. If relative is set to 1, the destination will be relative to the player's current position</div>
+	<div>player move [offsetX] [offsetY] [offsetZ] - shifts player to a certain number of units.</div>
+	<div>player rotation [angleX] [angleY] - sets camera rotation. angleX is up-down rotation (0 - front, 90 - up). angleY is sideways (0 is to the right, 90 is up on the map)</div>
+	<div>player retro [0/1] - if 1, deactivates player and weapon viewbob.</div>
+	<div>player turn [0/1] - if 1, deactivates mouse usage and strafing.</div>
+	<div>player steps [0/1] - if 0, deactivates footsteps sound.</div>
+	<div>player speed [value] - changes player speed.</div>
+	<div>player sethp [value] - directly set the player's hp without triggering flashes.</div>
+	<div>player setmaxhp [value] - set the player's max hp.</div>
+	<div>player givearmour [value] - gives armour to the player..</div>
+	<div>player takearmour [value] - takes armour from the player.</div>
+	<div>player setarmour [value] - set the player's armour.</div>
+	<div>player setmaxarmour [value] - set the player's max armour.</div>
+	<div>player cancrouch [0/1] - set whether the player can crouch.</div>
+	<div>player canjump [0/1] - set whether the player can jump.</div>
+	<div>player height [walk/crouch] [value] - set the player's walk or crouch height. Default walk height is 42. Default crouch height is 25.2</div>
+	<div>player weapon holster - holsters the current weapon without removing it</div>
+	<div>player zoom [value] - Sets the zoom/fov to use (0 = normal, 100 = max zoom, -100 = min zoom)</div>
+	<div>player camspeed [value] - Sets the multiplier to use for camera turning speed (1 = normal, 0.5 = half, etc)</div>
+	<hr />
+	<div>player check hp [variable] - sets variable to the player's current health.</div>
+	<div>player check maxhp [variable] - sets variable to the player's max health.</div>
+	<div>player check armour [variable] - sets variable to the player's current armour.</div>
+	<div>player check maxarmour [variable] - sets variable to the player's max armour.</div>
+	<div>player check key [number] [variable] - sets variable to 1 or 0, indicating if the player has key[number].</div>
+	<div>player check weapon [slot] [variable] - sets variable to 1 or 0, indicating if the player has weapon[slot].</div>
+	<div>player check ammo [slot] [variable] - sets variable to the total amount of ammo in weapon[slot].</div>
+	<div>player check mag [slot] [variable] - sets variable to the amount of ammo in weapon[slot]'s mag.</div>
+	<div>player check heldweapon [variable] - sets variable to the currently selected weapon slot.</div>
+	<div>player check position [varX] [varY] [varZ] - sets variable x/y/z to the player's current position.</div>
+	<div>player check rotation [varX] [varY] - sets variable x/y to the player's current x/y rotation. (y-axis rotation is for </div>
+	</div>
+	
+	<div class="command" id="entity">
+	<div><b>entity</b></div>
+	<div>entity delete [tileX] [tileY] [tileZ] - deletes entity in a certain tile. <b>tileZ is floor number</b>.</div>
+	<div>entity delete me - deletes entity that called a script (or decoration that player used).</div>
+	<div>entity move [tileX] [tileY] [tileZ] [offsetX] [offsetY] [offsetZ] - shifts entity.</div>
+	<div>entity spawnat [enemyname/decorationname/Key1-3/Hp1-3] [tileX] [tileY] [tileZ] - creates entity at tile coordinates (as shown in map editor).</div>
+	<div>entity spawnatpos [enemyname/decorationname/Key1-3/Hp1-3] [X] [Y] [Z] - creates entity at a certain number of units.</div>
+	</div>
+	
+	<div class="command" id="door">
+	<div><b>door</b></div>
+	<div>door open [tileX] [tileY] [tileZ] [stay? 0/1] - opens a door in a tile. If stay is set to 1, the door will only close again with a script.</div>
+	<div>door close [tileX] [tileY] [tileZ] - closes a door.</div>
+	<div>door lock [tileX] [tileY] [tileZ] - locks a door. It will not open by player ever, only through script.</div>
+	<div>door unlock [tileX] [tileY] [tileZ] - unlocks a door.</div>
+	</div>
+	
+	<div class="command" id="light">
+	<div><b>light</b></div>
+	<div>light create [tileX] [tileY] [tileZ] [radius] [r] [g] [b] - creates a light source at tile coordinates (as shown in map editor) with your own preferences. Color values are 0-255</div>
+	<div>light move [tileX] [tileY] [tileZ] [offsetX] [offsetY] [offsetZ] - shifts any light source.</div>
+	<div>light status [on/off] [tileX] [tileY] [tileZ] - turns on/off any light source.</b></div>
+	</div>
+
+	<div class="command" id="status">
+	<div><b>status</b></div>
+	<div>status [string] [time] - shows a text for a certain amount of time.</div>
+	</div>
+
+	<div class="command" id="give">
+	<div><b>give</b></div>
+	<div>give weapon [slot] - gives weapon to a slot (1 - 8).</div>
+	<div>give ammo [slot] [amount] - gives ammo for a slot.</div>
+	<div>give key [number] - gives key to the player.</div>
+	</div>
+
+	<div class="command" id="take">
+	<div><b>take</b></div>
+	<div>take weapon [slot] - takes weapon from a slot (1 - 8).</div>
+	<div>take ammo [slot] - takes ALL ammo from a slot.</div>
+	<div>take key [number] - takes key from player.</div>
+	</div>
+	
+	<div class="command" id="cursor">
+	<div><b>cursor</b></div>
+	<div>cursor [1/0] - shows or hides a cursor. Not supposed to work while showing text with "vn" on.</div>
+	</div>
+
+	<div class="command" id="shader">
+	<div><b>shader</b></div>
+	<div>shader set [name] - sets current shader. Default shader name is - "default".</div>
+	<div>shader set [name] [path] - loads a shader, sets it's name and sets it as a current one (vert and frag shaders should be placed in Data/Shaders).</div>
+	</div>
+	
+	<div class="command" id="game">
+	<div><b>game</b></div>
+	<div>game save slot [1-8] - saves game to a slot.</div>
+	<div>game save auto - saves game to autosave slot.</div>
+	<div>game load slot [1-8] - loads game from a slot.</div>
+	<div>game load auto - loads game from autosave slot.</div>
+	</div>
+	
+	<div class="command" id="gravity">
+	<div><b>gravity</b></div>
+	<div>gravity [strength] - sets the strength of the gravity (default is 970)</div>
+	</div>
+	
+	<div class="command" id="weapon">
+	<div><b>weapon</b></div>
+	<div>weapon maxammo [slot] [value] - sets the max ammo of weapon[slot] to [value]</div>
+	<div>weapon magsize [slot] [value] - sets the max magazine size of weapon[slot] to [value]</div>
+	<div>weapon damage [slot] [value] - sets the damage of weapon[slot] to [value]</div>
+	<div>weapon firerate [slot] [value] - sets the fire rate of weapon[slot] to [value]</div>
+	<div>weapon bullets [slot] [value] - sets the bullet count of weapon[slot] to [value]</div>
+	<div>weapon reloadspeed [slot] [value] - sets the reload speed weapon[slot] to [value]</div>
+	<div>weapon projectilespeed [slot] [value] - sets the projectile speed of weapon[slot] to [value]</div>
+	<div>weapon explosion [slot] [value] - sets the explosion radius of weapon[slot] to [value]</div>
+	<div>weapon recoil [slot] [value] - sets the recoil of weapon[slot] to [value]</div>
+	<div>weapon spread [slot] [value] - sets the spread of weapon[slot] to [value]</div>
+	<div>weapon recoilrecovery [slot] [value] - sets the recoil recovery of weapon[slot] to [value]</div>
+	<div>weapon range [slot] [value] - sets the range of weapon[slot] to [value]</div>
+	</div>
+	
+	<div class="command" id="hud">
+	<div><b>hud</b></div>
+	<div>hud image [imageName] [x] [y] [scale] [path] [layer] - Creates or updates a hud image. Using the same imageName will replace the previous hud image with that name. Higher layer images will be rendered on top of lower-layer images. Calling 'hud image [imageName]' without any other parameters will remove the specified hud image.</div>
+	</div>
+
+	<h3>Cutscene commands list:</h3>
+	<div class="command">
+	<div><b>vn</b></div>
+	<div>vn [1/0] - enables or disables visual novel mode.</div>
+	</div>
+
+	<div class="command">
+	<div><b>text</b></div>
+	<div>text [string] [r] [g] [b] - places text on screen (or in a textbox of VN mode is enabled) with a set color (if omitted color will be white).</div>
+	</div>
+
+	<div class="command">
+	<div><b>font</b></div>
+	<div>font [size] - sets font size.</div>
+	</div>
+
+	<div class="command">
+	<div><b>preload</b></div>
+	<div>preload [1/0] - enables or disables images preloading. Disable to save memory. Recommended on long cutscenes.</div>
+	</div>
+
+	<div class="command">
+	<div><b>image</b></div>
+	<div>image [name] [path] - loads an image and sets it's name. Path may be anything in scope of your project folder (omit ProjectName/ part. For example "Images/Image.png" will tell engine to look into "ProjectName/Images/Image.png")</div>
+	</div>
+
+	<div class="command">
+	<div><b>sound</b></div>
+	<div>sound [name] [path] - loads sound and sets it's name. Path rules are the same as for images.</div>
+	</div>
+
+	<div class="command">
+	<div><b>show</b></div>
+	<div>show [imageName] [x] [y] [time] - shows image within set time. imageName is the name that was set to an image when loading. If time is 0 or omitted then image will be shown immediately.</div>
+	</div>
+	
+	<div class="command">
+	<div><b>bg</b></div>
+	<div>bg [imageName] [time] - shows background within set time. Unlike images bgs are stretched to fill entire screen.</div>
+	</div>
+
+	<div class="command">
+	<div><b>hide</b></div>
+	<div>hide [imageName] [time] - hides image within set time. Including backgrounds and buttons. imageName is name of image that was set when loading.</div>
+	</div>
+
+	<div class="command">
+	<div><b>play</b></div>
+	<div>play sound [name] - plays sound with a name that was set when loading.</div>
+	<div>play music [path] - plays music. Path rules are the same as for sounds and images.</div>
+	<div>play video [path] - plays video. Currently only supports efpse .vid files. Convert your videos with <a href="https://github.com/CG8516/ImgStreamCreator/releases" target="_parent">this tool</a></div>
+	</div>
+
+	<div class="command">
+	<div><b>stop</b></div>
+	<div>stop music - stops cutscene music. You can't stop map music.</div>
+	<div>stop sound [name] - stop the specified sound.</div>
+	<div>stop sounds - stop all played sounds.</div>
+	</div>
+
+	<div class="command">
+	<div><b>button</b></div>
+	<div>button [imageName] [x] [y] [procedurename] - shows button that will call procedure upon clicking on it. Button image should consist of three images in a row. The first one is for button when it's not pressed and cursor is not over it. Second is when cursor is over it. Third - when it's pressed.</div>
+	</div>
+
+	<div class="command">
+	<div><b>label</b></div>
+	<div>label imageName [x] [y] [string] [size] [r] [g] [b] [center/left/right] - places text on any place of the screen.</div>
+	</div>
+
+	<div class="command">
+	<div><b>move</b></div>
+	<div>move [imageName] [x] [y] [time] - moves image to certain coordinates within time.</div>
+	</div>
+
+	<div class="command">
+	<div><b>front</b></div>
+	<div>front [imageName] - moves image in front of everything else.</div>
+	</div>
+
+	<div class="command">
+	<div><b>back</b></div>
+	<div>back [imageName] - moves image to the back.</div>
+	</div>
+	
+	<p>There is also exactly one special command that is used only in menu script:<p>
+	<div class="command">
+	<div><b>bind</b></div>
+	<div>bind [button] [scriptname] - bind a script that will be executed when a button is pressed. Script file should be placed in ProjectName/Scripts.</div>
+	</div>
+
+	
+  </body>
+  
+</html>

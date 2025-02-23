@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Enemies</title>
+	<link rel="stylesheet" href="../../css/styles.css">
+  </head>
+  <body>
+	<p>Enemies can be added through "Enemies Settings" menu in "Entities Settings".</p>
+	<p>The menu is almost the same as for weapons with a few differences: you can add new entries. to do so enter the name of the enemy and either press Return or click a button to the right.</p>
+	<p><div id="center"><img src="Enemies1.png"/></div></p>
+	
+	<p>You can also set the scale:</p>
+	<p><div id="center-small"><img src="Enemies2.png"/></div></p>
+	<p>This windows shows enemy sprite relative to one tile. This is made to let you check if your sprite's height fits a single floor.</p>
+	
+	<p>Enemy properties:</p>
+	<el>
+	<li><b>Health</b> - enemy health</li>
+	<li><b>Damage</b> - damage dealt to player</li>
+	<li><b>Speed</b> - enemy speed. In units per second</li>
+	<li><b>Radius</b> - enemy radius. Used for collision checking with player</li>
+	<li><b>Drops</b> - item this enemy drops when dying</li>
+
+	<li><b>Attack delay</b> - amount of seconds enemy wait before next attack</li>
+	<li><b>Explosion radius</b> - if set to a non-zero value enemy will explode after death</li>
+	<li><b>Projectile speed</b> - if enemy uses projectiles this sets projectile speed in units per second</li>
+	<li><b>Weapon spread</b> - projectile spread strength, higher values will cause wider and less accurate shots</li>
+	<li><b>Is shooting</b> - if set, enemy will shoot instead of moving closer to attack</li>
+	<li><b>Uses projectiles</b> - sets if enemy uses projectiles</li>
+	<li><b>Fullbright projectiles</b> - disabes or enables lighting on projectiles</li>
+	<li><b>Delete after death</b> - removes sprite after death</li>
+	
+	</el>
+  </body>
+  
+</html>
